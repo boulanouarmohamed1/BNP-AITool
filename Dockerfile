@@ -14,7 +14,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
+# The default Linux PyTorch wheel now brings CUDA dependencies. The app uses
+# CPU embeddings, so install the lean CPU wheel explicitly first.
 RUN pip install --upgrade pip \
+    && pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1 \
     && pip install -r requirements.txt
 
 COPY . ./
