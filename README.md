@@ -22,30 +22,6 @@ The first start downloads the configured Ollama model and the RAG embedding mode
 
 Place review inputs in `documents/`. Generated certifications, analysis logs, and exports stay in `certified/`, `logs/`, and `output/`; these folders are deliberately excluded from Git and the Docker image because they can contain client data.
 
-## Publish to GitHub
-
-```sh
-git init
-git add .
-git commit -m "Initial Dockerized application"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/BNP-Cha.git
-git push -u origin main
-```
-
-Create the empty GitHub repository first. Do not commit `.env` or runtime document/output folders.
-
-## Publish to Docker Hub
-
-Sign in and build/push using your Docker Hub namespace:
-
-```sh
-docker login
-docker build -t YOUR-DOCKERHUB-USERNAME/bnp-cha:latest .
-docker push YOUR-DOCKERHUB-USERNAME/bnp-cha:latest
-```
-
-To run the published image with the included Compose stack, set `DOCKER_IMAGE=YOUR-DOCKERHUB-USERNAME/bnp-cha:latest` in `.env` and use `docker compose up`.
 
 ## Configuration
 
