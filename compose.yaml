@@ -1,0 +1,50 @@
+services:
+  app:
+    build:
+      context: .
+    image: ${DOCKER_IMAGE:-bnp-cha:local}
+    ports:
+      - "${APP_PORT:-8501}:8501"
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      SEMANTIC_VERIFIER_MODEL: ${SEMANTIC_VERIFIER_MODEL:-qwen2.5:3b}
+      RAG_EMBEDDING_MODEL: ${RAG_EMBEDDING_MODEL:-BAAI/bge-m3}
+    volumes:
+      - ./documents:/app/documents
+      - ./certified:/app/certified
+      - ./logs:/app/logs
+      - ./output:/app/output
+      - huggingface-cache:/root/.cache/huggingface
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+
+  # Downloads the configured model once. It exits successfully afterwards;
+  # the model remains in the persistent ollama-data volume.
+  ollama-init:
+    image: ollama/ollama:latest
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      SEMANTIC_VERIFIER_MODEL: ${SEMANTIC_VERIFIER_MODEL:-qwen2.5:3b}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |-
+        until ollama list >/dev/null 2>&1; do sleep 2; done
+        ollama pull "$${SEMANTIC_VERIFIER_MODEL}"
+    depends_on:
+      - ollama
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: "no"
+
+volumes:
+  huggingface-cache:
+  ollama-data:

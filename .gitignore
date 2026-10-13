@@ -1,0 +1,20 @@
+# Python and local tools
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.DS_Store
+.pytest_cache/
+.mypy_cache/
+
+# Runtime documents and generated records: do not publish client data.
+documents/
+certified/
+logs/
+output/
+tmp/
+
+# Docker and IDE state
+*.log
+.vscode/
+.idea/
