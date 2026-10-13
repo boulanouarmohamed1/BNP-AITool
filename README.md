@@ -1,4 +1,5 @@
-# BNP-Cha
+# BNP-Chat
+
 
 Streamlit workspace for reviewing extracted financial statements, running deterministic and AI-assisted consistency checks, and exporting certified JSON.
 
