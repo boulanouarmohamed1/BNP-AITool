@@ -237,6 +237,7 @@ def _write_analysis_log(entry: dict[str, Any]) -> Path:
     return path
 
 
+
 def analyse_document(data: dict[str, Any], use_ai: bool = True, json_name: str = "unknown.json", model: str | None = None) -> dict[str, Any]:
     rule_issues = deterministic_checks(data)
     candidates, raw, model_used = [], [], None
