@@ -1,4 +1,4 @@
-"""Human review UI for OCR/VL fiscal-document extractions."""
+""" Human review Interface for OCR/VL fiscal-document extractions."""
 
 from __future__ import annotations
 
