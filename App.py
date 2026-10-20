@@ -1,27 +1,17 @@
 """ Human review Interface for OCR/VL fiscal-document extractions."""
 
 from __future__ import annotations
-
 import base64
-
 import copy
-
 import json
-
 import os
 import urllib.error
 import urllib.request
-
 from pathlib import Path
-
 from typing import Any, Iterator
-
 import hashlib
-
 import streamlit as st
-
 from certification import create_certified_json, save_certified_json
-
 from SemanticVerifier import analyse_document
 from rag import build_prompt, build_rag, pdf_fingerprint, references_from_chunks, retrieve
 
