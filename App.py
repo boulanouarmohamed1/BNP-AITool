@@ -15,6 +15,7 @@ from certification import create_certified_json, save_certified_json
 from SemanticVerifier import analyse_document
 from rag import build_prompt, build_rag, pdf_fingerprint, references_from_chunks, retrieve
 
+
 ROOT = Path(__file__).resolve().parent
 
 DOCUMENTS_DIR = ROOT / "documents"
